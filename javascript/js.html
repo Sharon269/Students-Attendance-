@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Person Card</title>
+</head>
+<style>
+        .card {
+            width: 250px;
+            border: 2px solid black;
+            border-radius: 10px;
+            background-color: lightblue;
+            text-align: center;
+        }
+    </style>
+
+<body>
+
+    <div class="card"></div>
+
+    <script>
+
+        const person1 = {
+            name: "Akshay",
+            age: 21,
+            profession: "Training"
+        };
+
+        const person2 = {
+            name: "Sharon",
+            age: 21,
+            profession: "PG"
+        };
+
+        document.querySelector(".card").innerHTML = `
+            <h1>${person1.name}</h1>
+            <p>Age: ${person1.age}</p>
+            <p>Profession: ${person1.profession}</p>
+
+            
+
+            <h1>${person2.name}</h1>
+            <p>Age: ${person2.age}</p>
+            <p>Profession: ${person2.profession}</p>
+        `;
+
+    </script>
+
+</body>
+
+</html>

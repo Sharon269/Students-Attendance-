@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Online Ticket Booking</title>
+</head>
+
+<body>
+
+    <h1>Online Ticket Booking</h1>
+
+    <div id="movies"></div>
+
+    <div id="latest">
+        <h3>Latest Notification</h3>
+    </div>
+
+    <div id="old">
+        <h3>Old Notifications</h3>
+    </div>
+
+    <script>
+
+        const movies = [
+            { id: 1, name: "Premikula Roju" },
+            { id: 2, name: "Sakhi" },
+            { id: 3, name: "Andhala Rakshasi" }
+        ];
+
+        let notifications = [];
+
+        function displayMovies() {
+
+            const container = document.getElementById("movies");
+
+            movies.forEach(({ name }) => {
+
+                container.innerHTML += `
+                    <div>
+                        <h3>${name}</h3>
+
+                        <button onclick="booktickets('${name}')">
+                            Book Ticket
+                        </button>
+                        <hr>
+                    </div>
+                `;
+            });
+        }
+
+        function booktickets(name) {
+
+            notifications = [
+                `Ticket booked successfully for ${name}`,
+                ...notifications
+            ];
+
+            const [latest, ...old] = notifications;
+
+            document.getElementById("latest").innerHTML = `
+                <h3>Latest Notification</h3>
+                <p>${latest}</p>
+            `;
+
+            let oldMessages = "";
+
+            old.forEach(function(message) {
+
+                oldMessages += `
+                    <p>${message}</p>
+                `;
+            });
+
+            document.getElementById("old").innerHTML = `
+                <h3>Old Notifications</h3>
+
+                ${oldMessages}
+            `;
+        }
+
+        displayMovies();
+
+    </script>
+
+</body>
+</html>

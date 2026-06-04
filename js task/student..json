@@ -1,0 +1,29 @@
+const students = [
+    {
+        id: 101,
+        name: "Manoj",
+        phone: "9876543210",
+        attendance: "Present"
+    },
+
+    {
+        id: 102,
+        name: "Rahul",
+        phone: "9876543211",
+        attendance: "Absent"
+    },
+
+    {
+        id: 103,
+        name: "Sai",
+        phone: "9876543212",
+        attendance: "Present"
+    },
+
+    {
+        id: 104,
+        name: "Priya",
+        phone: "9876543213",
+        attendance: "Absent"
+    }
+];

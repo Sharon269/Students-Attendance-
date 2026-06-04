@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Storage Demo</title>
+
+  <style>
+
+    body {
+      font-family: Arial;
+      padding: 30px;
+      background: #f4f4f4;
+    }
+
+    .box {
+      background: white;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      width: 400px;
+    }
+
+    button {
+      padding: 10px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    input {
+      padding: 8px;
+      width: 250px;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <h1>Local Storage, Session Storage & Cookies</h1>
+
+
+  <!-- LOCAL STORAGE -->
+
+  <div class="box">
+
+    <h2>1. localStorage</h2>
+
+    <p>
+      Saves data permanently even after browser closes.
+    </p>
+
+    <input
+      type="text"
+      id="localInput"
+      placeholder="Enter theme"
+    >
+
+    <button onclick="saveLocalStorage()">
+      Save to localStorage
+    </button>
+
+    <p id="localOutput"></p>
+
+  </div>
+
+
+
+  <!-- SESSION STORAGE -->
+
+  <div class="box">
+
+    <h2>2. sessionStorage</h2>
+
+    <p>
+      Saves data only for current tab/session.
+    </p>
+
+    <input
+      type="text"
+      id="sessionInput"
+      placeholder="Enter current page"
+    >
+
+    <button onclick="saveSessionStorage()">
+      Save to sessionStorage
+    </button>
+
+    <p id="sessionOutput"></p>
+
+  </div>
+
+
+
+  <!-- COOKIES -->
+
+  <div class="box">
+
+    <h2>3. Cookies</h2>
+
+    <p>
+      Cookies are sent automatically to server.
+    </p>
+
+    <input
+      type="text"
+      id="cookieInput"
+      placeholder="Enter username"
+    >
+
+    <button onclick="saveCookie()">
+      Save Cookie
+    </button>
+
+    <p id="cookieOutput"></p>
+
+  </div>
+
+
+
+
+
+  <script>
+
+    // LOCAL STORAGE
+
+    function saveLocalStorage() {
+
+      const value =
+        document.getElementById("localInput").value;
+
+      localStorage.setItem("theme", value);
+
+      document.getElementById("localOutput")
+        .innerText =
+        "Saved in localStorage: " +
+        localStorage.getItem("theme");
+
+    }
+
+
+
+    // SESSION STORAGE
+
+    function saveSessionStorage() {
+
+      const value =
+        document.getElementById("sessionInput").value;
+
+      sessionStorage.setItem(
+        "currentPage",
+        value
+      );
+
+      document.getElementById("sessionOutput")
+        .innerText =
+        "Saved in sessionStorage: " +
+        sessionStorage.getItem("currentPage");
+
+    }
+
+
+
+    // COOKIES
+
+    function saveCookie() {
+
+      const value =
+        document.getElementById("cookieInput").value;
+
+      document.cookie =
+        "username=" + value;
+
+      document.getElementById("cookieOutput")
+        .innerText =
+        "Cookie Saved: " +
+        document.cookie;
+
+    }
+
+
+
+    // SHOW EXISTING VALUES ON PAGE LOAD
+
+
+    // localStorage
+    const localData =
+      localStorage.getItem("theme");
+
+    if (localData) {
+
+      document.getElementById("localOutput")
+        .innerText =
+        "Existing localStorage: " + localData;
+
+    }
+
+
+
+    // sessionStorage
+    const sessionData =
+      sessionStorage.getItem("currentPage");
+
+    if (sessionData) {
+
+      document.getElementById("sessionOutput")
+        .innerText =
+        "Existing sessionStorage: " + sessionData;
+
+    }
+
+
+
+    // cookies
+    if (document.cookie) {
+
+      document.getElementById("cookieOutput")
+        .innerText =
+        "Existing Cookie: " + document.cookie;
+
+    }
+
+  </script>
+
+</body>
+</html>

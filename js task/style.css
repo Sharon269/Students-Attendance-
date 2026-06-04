@@ -1,0 +1,104 @@
+body {
+
+    font-family: Arial;
+    background: #f2f2f2;
+    padding: 20px;
+}
+
+.login-box,
+.dashboard,
+.attendance-container {
+
+    width: 900px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+input {
+
+    width: 95%;
+    padding: 10px;
+    margin-top: 15px;
+}
+
+button {
+
+    padding: 10px 20px;
+    background: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.top-boxes {
+
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.box {
+
+    flex: 1;
+    background: lightblue;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+#studentContainer {
+
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.student-card {
+
+    width: 100px;
+    background: orange;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 10px;
+    color: white;
+}
+
+.student-card:hover {
+
+    background: darkorange;
+}
+
+#studentDetails {
+
+    margin-top: 30px;
+    background: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.attendance-row {
+
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background: #f4f4f4;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.present {
+
+    color: green;
+    font-weight: bold;
+}
+
+.absent {
+
+    color: red;
+    font-weight: bold;
+}

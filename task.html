@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Expense Tracker Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: white;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+        .summary {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .card {
+            background: white;
+            width: 200px;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0px 2px 5px gray;
+        }
+        .form-box {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+        input,
+        select,
+        button {
+            padding: 10px;
+            margin: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        table,
+        th,
+        td {
+            border: 1px solid gray;
+        }
+        th {
+            background: black;
+            color: white;
+        }
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+        }
+        .deleteBtn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Smart Expense Tracker Dashboard</h1>
+    <div class="summary">
+        <div class="card">
+            <h3>Total Expense</h3>
+            <p id="totalExpense">0</p>
+        </div>
+        <div class="card">
+            <h3>Total Transactions</h3>
+            <p id="totalTransactions">0</p>
+        </div>
+        <div class="card">
+            <h3>Highest Expense</h3>
+            <p id="highestExpense">0</p>
+        </div>
+    </div>
+    <div class="form-box">
+        <input type="text" id="title" placeholder="Enter Expense Title">
+        <select id="category">
+
+            <option value="Food">Food</option>
+            <option value="Travel">Travel</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Bills">Bills</option>
+        </select>
+        <input type="number" id="amount" placeholder="Enter Amount">
+        <button onclick="addExpense()">Add Expense</button>
+
+    </div>
+    <div>
+
+        <label>Filter By Category:</label>
+
+        <select onchange="filterExpenses(this.value)">
+
+            <option value="All">All</option>
+            <option value="Food">Food</option>
+            <option value="Travel">Travel</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Bills">Bills</option>
+
+        </select>
+    </div>
+    <br>
+    <table>
+        <thead>
+            <tr>
+
+                <th>ID</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Amount</th>
+                <th>Action</th>
+
+            </tr>
+        </thead>
+        <tbody id="expenseTable">
+        </tbody>
+    </table>
+    <script>
+        let expenses = [
+
+            {
+                id: 1,
+                title: "resturant bill",
+                category: "Food",
+                amount: 500
+            },
+            {
+                id: 2,
+                title: "Bus Ticket",
+                category: "Travel",
+                amount: 300
+            },
+            
+            
+        ];
+        function displayExpenses(expenseList) {
+
+            let rows = "";
+
+            expenseList.forEach(function (expense) {
+
+                rows += `
+
+                <tr>
+
+                    <td>${expense.id}</td>
+
+                    <td>${expense.title}</td>
+
+                    <td>${expense.category}</td>
+
+                    <td>₹${expense.amount}</td>
+
+                    <td>
+
+                        <button 
+                        class="deleteBtn"
+                        onclick="deleteExpense(${expense.id})">
+
+                        Delete
+
+                        </button>
+
+                    </td>
+
+                </tr>
+
+                `;
+
+            });
+            document.getElementById("expenseTable").innerHTML = rows;
+        }
+        function addMultipleExpenses(...newExpenses) {
+            expenses.push(...newExpenses);
+            displayExpenses(expenses);
+            updateSummary();
+        }
+        function addExpense() {
+            let title = document.getElementById("title").value;
+            let category = document.getElementById("category").value;
+            let amount = document.getElementById("amount").value;
+            let newExpense = {
+               id: expenses.length + 1,
+                title: title,
+                category: category,
+                amount: Number(amount)
+            };
+            addMultipleExpenses(newExpense);
+            document.getElementById("title").value = "";
+            document.getElementById("amount").value = "";
+        }
+        function filterExpenses(category) {
+            if (category === "All") {
+
+                displayExpenses(expenses);
+            }
+            else {
+                let filteredExpenses = expenses.filter(function (expense) {
+                    return expense.category === category;
+                });
+                displayExpenses(filteredExpenses);
+            }
+        }
+        function deleteExpense(id) {
+            expenses = expenses.filter(function (expense) {
+                return expense.id !== id;
+            });
+            displayExpenses(expenses);
+            updateSummary();
+        }
+        function updateSummary() {
+            let total = expenses.reduce(function (sum, expense) {
+                return sum + expense.amount;
+            }, 0);
+            let highest = expenses.reduce(function (max, expense) {
+                return expense.amount > max
+                    ? expense.amount
+                    : max;
+            }, 0);
+            let transactions = expenses.length;
+            document.getElementById("totalExpense").innerHTML = "₹" + total;
+
+            document.getElementById("totalTransactions").innerHTML = transactions;
+
+            document.getElementById("highestExpense").innerHTML = "₹" + highest;
+        }
+        function generateReport() {
+            console.log("Expense Report Generated");
+        }
+        let report = generateReport.bind();
+        report();
+        displayExpenses(expenses);
+        updateSummary();
+    </script>
+</body>
+</html>

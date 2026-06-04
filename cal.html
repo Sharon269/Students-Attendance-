@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculate Total</title>
+</head>
+<body>
+    <input type="number" id="numberInput">
+    <button onclick="addNumber()">Add</button>
+    <button onclick="calculateTotal()">Calculate Total</button>
+
+    <p id="numbers"></p>
+    <p id="total"></p>
+
+    <script>
+        let ItemPrice=[];
+        function addNumber(){
+            let value=document.getElementById("numberInput").value;
+            value=Number(value);
+            ItemPrice.push(value);
+            document.getElementById("numbers").innerHTML=
+            "ItemPrice:"+ItemPrice.join(",")
+            document.getElementById("numberInput").value="";
+        }
+        function calculateTotal(){
+            let total=ItemPrice.reduce(function(sum,currentValue) 
+            {
+                return sum+currentValue;
+            }, 0 );
+            document.getElementById("total").innerHTML="calculate Total ="+total;
+        }
+    </script>
+</body>
+</html>

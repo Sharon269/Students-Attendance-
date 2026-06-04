@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Attendance</title>
+</head>
+<body>
+  <h2>Student Attendance</h2>
+  <ul id="studentList"></ul>
+  <script>
+    const students = [
+      {
+        id: 1,
+        name: "Akshay",
+        attendance: "Present"
+      },
+      {
+        id: 2,
+        name: "Sharon",
+        attendance: "Absent"
+      }
+    ];
+    fetch("fake-api")
+    .then(() => {
+      return students;
+
+    })
+
+    .then((data) => {
+
+      const studentList = document.getElementById("studentList");
+      data.forEach((student) => {
+        const li = document.createElement("li");
+        li.innerText =student.name + " - " + student.attendance;
+        studentList.appendChild(li);
+
+      });
+
+    })
+
+    .catch((error) => {
+      console.log("Error:", error);
+    });
+
+  </script>
+
+</body>
+</html>
